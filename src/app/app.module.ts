@@ -12,6 +12,7 @@ import { UserState } from './state/user/user.state';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { CoreModule } from './modules/core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
     NgxsModule.forRoot([
       UserState
     ],

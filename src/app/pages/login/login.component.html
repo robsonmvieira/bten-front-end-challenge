@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="d-flex flex-column justify-content-center align-items-center align-content-center container-fluid">
+  <div class="col-4 h-100">
+    <form class=" h-100" [formGroup]="loginForm">
+      <div class="form-group" >
+        <label for="exampleInputEmail1">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          id="exampleInputPassword1">
+      </div>
+      <button
+        [disabled]="loginForm.invalid"
+        (click)="submit()"
+        type="submit"
+        class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>

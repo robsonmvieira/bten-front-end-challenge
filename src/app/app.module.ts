@@ -8,7 +8,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { UserState } from './state/user/user.state';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxsModule.forRoot([
+      UserState
+    ],
+    { developmentMode: !environment.production }),
+    NgxsReduxDevtoolsPluginModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { CreateUserDTO } from "./dtos/create-user.dto"
+import { LoginRequest } from "./dtos/login.dto"
 import { UpdateUserDTO } from "./dtos/update-user.dto"
 
 export class GetAllUsers {
@@ -11,7 +12,7 @@ export class GetUserById {
   constructor(public userId: string) {}
 }
 
-export class CreateUsers {
+export class CreateUser {
   static readonly type = '[User] create new user'
   constructor(public payload: CreateUserDTO) {}
 }
@@ -25,3 +26,9 @@ export class DeleteUsers {
   static readonly type = '[User] delete user'
   constructor(public userId: string) {}
 }
+
+export class Login {
+  static readonly type = '[Auth] login'
+  constructor(public loginProps: LoginRequest) {}
+}
+

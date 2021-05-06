@@ -1,0 +1,24 @@
+.graph-area {
+  border: solid 1px #ddd;
+  border-radius: 10px;
+}
+.graph {
+  width: 360px;
+  height: 310px;
+  background: #9DBCF4;
+}
+
+.card-blue {
+  background-image: linear-gradient(to bottom right, #1C90F3, #0D5DE5);
+  height: 100%;
+}
+.card-blue .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.new-records {
+  max-width: 182px;
+}
+

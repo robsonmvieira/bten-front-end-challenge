@@ -14,6 +14,8 @@ import { CoreModule } from './modules/core/core.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorRequest } from './services/http.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { ToastrModule } from 'ngx-toastr';
     NgxsReduxDevtoolsPluginModule.forRoot()
 
   ],
-  providers: [],
+  providers: [
+    { provide:HTTP_INTERCEPTORS,useClass: HttpInterceptorRequest, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

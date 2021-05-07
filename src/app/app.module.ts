@@ -11,6 +11,9 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CoreModule } from './modules/core/core.module';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,11 +21,13 @@ import { CoreModule } from './modules/core/core.module';
     RegisterComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    BsDropdownModule.forRoot(),
     NgxsModule.forRoot([
       UserState
     ],

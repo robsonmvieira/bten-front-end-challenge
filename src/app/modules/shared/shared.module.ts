@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component'
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -11,13 +11,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     SidebarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BsDropdownModule.forRoot(),
   ],
   exports: [
     ReactiveFormsModule,
     FormsModule,
     MenuComponent,
-    SidebarComponent
+    SidebarComponent,
   ]
 })
 export class SharedModule { }

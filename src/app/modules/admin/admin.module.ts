@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [AdminComponent, DashboardComponent],
@@ -15,6 +15,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CommonModule,
     AdminRoutingModule,
     SharedModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ]
 })
 export class AdminModule { }

@@ -8,7 +8,12 @@
       <div class="row px-4 py-4">
         <div class="col-lg-8 d-xl-flex graph-area">
           <div class="graph mx-4 my-5">
-            <h2>Graph goes here</h2>
+            <div
+            echarts
+            [options]="pizzaChard"
+            style="width: 300px"
+            class="demo-chart"
+          ></div>
           </div>
           <div class="new-records mx-4 my-5">
             <h3>New Records</h3>

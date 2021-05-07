@@ -1,11 +1,15 @@
+.sidebar {
+  height: auto;
+  min-height: calc(100vh - 118px);
+}
+
 .graph-area {
   border: solid 1px #ddd;
   border-radius: 10px;
 }
 .graph {
-  width: 360px;
+  width: 100%;
   height: 310px;
-  background: #9DBCF4;
 }
 
 .card-blue {
@@ -22,3 +26,9 @@
   max-width: 182px;
 }
 
+@media screen and(max-width: 767px) {
+  .sidebar{
+    height: auto;
+    min-height: inherit;
+  }
+}

@@ -9,8 +9,8 @@
       placeholder="Digite seu nome"
       autocomplete="off"
     >
-      <div *ngIf="registerForm.touched && registerForm.dirty">
-        <span *ngIf="f.name.errors?.required">
+      <div  *ngIf="registerForm.controls['name'].touched && registerForm.controls['name'].invalid">
+        <span class="error-message" *ngIf="f.name.errors?.required">
          *O nome é obrigatório
         </span>
 
@@ -24,12 +24,12 @@
         placeholder="Digite seu e-email"
         autocomplete="off"
       >
-      <div *ngIf="f.emai.touched && f.email.dirty && f.email.errors">
-        <span *ngIf="f.email.errors.required">
+      <div *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].invalid">
+        <span class="error-message" *ngIf="f.email.errors && f.email.errors.required">
           *O email é obrigatório
         </span>
 
-        <span *ngIf="f.email.errors.email">
+        <span *ngIf="f.email.errors && f.email.errors.email">
           *O formato do email é inválido
         </span>
 
@@ -43,12 +43,35 @@
       formControlName="password"
       placeholder="Digite sua senha">
 
+      <div *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].invalid">
+        <span class="error-message" *ngIf="f.password.errors && f.password.errors.required">
+          *A senha é obrigatória
+        </span>
+
+        <span class="error-message" *ngIf="f.password.errors && f.password.errors.minlength">
+          *A senha tem que ter ao menos 6 caracteres
+        </span>
+
+      </div>
+
     <label for="password">Confirmar Senha</label>
     <input
       type="password"
       name="password"
       formControlName="confirm_password"
-      placeholder="Confirmar senha">
+      placeholder="Confirmar senha"
+      >
+
+      <div *ngIf="registerForm.controls['confirm_password'].touched && registerForm.controls['confirm_password'].invalid">
+        <span class="error-message" *ngIf="f.confirm_password.errors && f.confirm_password.errors.required">
+          *A confirmação de senha é obrigatória
+        </span>
+
+        <span class="error-message" *ngIf="f.confirm_password.errors && f.confirm_password.errors.minlength">
+          *A senha tem que ter ao menos 6 caracteres
+        </span>
+
+      </div>
 
       <button
         [disabled]="registerForm.invalid"

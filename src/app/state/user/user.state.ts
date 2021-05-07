@@ -2,8 +2,10 @@ import { UserService } from "src/app/modules/admin/services/user.service";
 import { UserStateProps } from "./user-state.interface";
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { CreateUser, GetAllUsers, Login } from "./user.action";
+import { CreateUser, GetAllUsers, GetUserById, Login, Logout } from "./user.action";
 import { map } from "rxjs/operators";
+import { AuthService } from "src/app/services/auth-service.service";
+import { UserLogged } from "src/app/models/user-logged.entity";
 
 
 @State<UserStateProps>({
@@ -17,7 +19,9 @@ import { map } from "rxjs/operators";
 
 @Injectable()
 export class UserState {
-  constructor(private userService: UserService){}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService){}
 
   @Selector()
   static allUsers(ctx: UserStateProps) {
@@ -52,6 +56,7 @@ export class UserState {
       })
     )
   }
+
   @Action(Login)
   login(ctx: StateContext<UserStateProps>, action: Login) {
     return this.userService.login(action.loginProps).pipe(
@@ -61,15 +66,40 @@ export class UserState {
           ...state,
           userLogged: {...response.user},
           token: response.token })
+          this.authService.setToken(response.token)
+          localStorage.setItem("@userId", response.user.id)
       })
     )
   }
 
   @Action(CreateUser)
   createUser(ctx: StateContext<UserStateProps>, action: CreateUser) {
-    return this.userService.create(action.payload).pipe(
-      map((response: any) => { console.log('response => ', response.statusCode)})
+    return this.userService.create(action.payload)
+  }
+
+  @Action(GetUserById)
+  getUserById(ctx: StateContext<UserStateProps>, action: GetUserById) {
+    return this.userService.getOne(action.userId).pipe(
+      map(response => {
+        const state = ctx.getState();
+        const user = Object.assign(new UserLogged(), response)
+        ctx.patchState({
+          ...state,
+          userLogged: user
+        })
+      })
     )
+  }
+
+  @Action(Logout)
+  logout(ctx: StateContext<UserStateProps>) {
+    const state = ctx.getState();
+    ctx.patchState({
+      ...state,
+      users: [],
+      userLogged: null,
+      token: null
+    })
   }
 
 }

@@ -8,7 +8,7 @@ export class GetAllUsers {
 }
 
 export class GetUserById {
-  static readonly type = '[User] get users by id'
+  static readonly type = '[User] get user by id'
   constructor(public userId: string) {}
 }
 
@@ -30,5 +30,10 @@ export class DeleteUsers {
 export class Login {
   static readonly type = '[Auth] login'
   constructor(public loginProps: LoginRequest) {}
+}
+
+export class Logout {
+  static readonly type = '[Auth] logout'
+  constructor() {}
 }
 

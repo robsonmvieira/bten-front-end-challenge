@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import { ToastrService } from 'ngx-toastr';
 import { CreateUser } from 'src/app/state/user/user.action';
 
 @Component({
@@ -10,7 +11,10 @@ import { CreateUser } from 'src/app/state/user/user.action';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private store: Store) { }
 
   ngOnInit(): void {
     this.buildform()
@@ -31,13 +35,20 @@ export class RegisterComponent implements OnInit {
     const user = this.registerForm.getRawValue()
 
     this.store.dispatch( new CreateUser(user)).subscribe(response => {
-      console.log('response => ', response)
+      this.showSuccess()
     }, err => {
-      if (err.statusCode === 400) {
-        console.log('Informações erradas', err.message)
+      if (err.status === 400) {
+        this.showError()
       }
     })
+  }
 
+  showSuccess(): void {
+    this.toastr.success('Seu cadastro foi efetuado com sucesso', 'Que Máximo!');
+  }
+
+  showError(): void {
+    this.toastr.error('Alguma das informações estão incorreta', 'Que Bad!');
   }
 
 }

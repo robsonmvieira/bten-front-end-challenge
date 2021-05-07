@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Login } from 'src/app/state/user/user.action';
 
@@ -11,7 +12,10 @@ import { Login } from 'src/app/state/user/user.action';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private store: Store) { }
 
   ngOnInit(): void {
     this.buildform()
@@ -26,8 +30,11 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     const userProps = this.loginForm.getRawValue()
-
-    this.store.dispatch(new Login(userProps)).subscribe(el => console.log(el))
+    this.store.dispatch(new Login(userProps)).subscribe(response =>  {
+      if (response.users) {
+        this.router.navigate(['admin'])
+      }
+    })
 
   }
 
